@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import pyqtWrapperType
+from PyQt5.QtCore import QObject
 
 def singleton(class_):
   instances = {}
@@ -33,7 +33,7 @@ def singleton(class_):
   return getinstance
 
 
-class QSingleton(pyqtWrapperType):
+class QSingleton(type(QObject)):
     def __init__(cls, name, bases, dict):
         super(QSingleton, cls).__init__(cls, bases, dict)
         cls._instance = None

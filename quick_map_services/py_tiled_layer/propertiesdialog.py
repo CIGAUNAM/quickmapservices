@@ -21,9 +21,10 @@
 """
 import os
 
-from PyQt4 import uic
-from PyQt4.QtCore import QObject, SIGNAL
-from PyQt4.QtGui import QDialog, QDialogButtonBox, QPainter
+from PyQt5 import uic
+from PyQt5.QtCore import QObject, pyqtSignal
+from PyQt5.QtGui import QPainter
+from PyQt5.QtWidgets import QDialog, QDialogButtonBox
 
 
 CURR_PATH = os.path.dirname(__file__)
@@ -47,8 +48,8 @@ class PropertiesDialog(QDialog):
         self.ui.horizontalSlider_Contrast.valueChanged.connect(lambda x: self.ui.doubleSpinBox_Contrast.setValue(x/100.0))
         self.ui.doubleSpinBox_Contrast.valueChanged.connect(lambda x: self.ui.horizontalSlider_Contrast.setValue(x*100))
 
-        QObject.connect(self.ui.buttonBox.button(QDialogButtonBox.Apply), SIGNAL("clicked()"), self,
-                        SIGNAL("applyClicked()"))
+        QObject.connect(self.ui.buttonBox.button(QDialogButtonBox.Apply), pyqtSignal("clicked()"), self,
+                        pyqtSignal("applyClicked()"))
         # set init values
         self.initBlendingCombo()
         self.ui.textEdit_Properties.setText(layer.metadata())

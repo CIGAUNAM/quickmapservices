@@ -3,9 +3,10 @@ import os
 import shutil
 
 import sys
-from PyQt4 import uic
-from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QGroupBox, QListWidgetItem, QDialog, QMessageBox, QIcon, QVBoxLayout, QTableView, QHeaderView
+from PyQt5 import uic
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QGroupBox, QListWidgetItem, QDialog, QMessageBox, QVBoxLayout, QTableView, QHeaderView
 
 from .groups_list import GroupsList, USER_GROUP_PATHS
 from .group_edit_dialog import GroupEditDialog

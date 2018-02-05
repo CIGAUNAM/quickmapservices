@@ -29,9 +29,9 @@ __revision__ = '$Format:%H$'
 
 import os
 
-from PyQt4.QtGui import QFileDialog, QWidget, QHBoxLayout, QLineEdit, QToolButton
-from PyQt4.QtCore import QSettings
-from PyQt4 import QtCore
+from PyQt5.QtWidgets import QFileDialog, QWidget, QHBoxLayout, QLineEdit, QToolButton
+from PyQt5.QtCore import QSettings
+from PyQt5 import QtCore
 
 
 try:

@@ -21,12 +21,13 @@
  ***************************************************************************/
 """
 from __future__ import absolute_import
-from ConfigParser import ConfigParser
+# from configparser import ConfigParser
 import codecs
 import os
 import sys
-from PyQt4.QtCore import QCoreApplication
-from PyQt4.QtGui import QIcon, QAction
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QAction
 from qgis.core import QgsMessageLog
 from .config_reader_helper import ConfigReaderHelper
 from .custom_translator import CustomTranslator

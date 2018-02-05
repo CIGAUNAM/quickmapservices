@@ -25,11 +25,12 @@ from __future__ import absolute_import
 import os
 import sys
 
-from PyQt4 import uic
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5 import uic
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QDialog, QHeaderView, QMessageBox
 
-from qgis.core import QgsApplication, QGis
+from qgis.core import QgsApplication, Qgis
 
 from .extra_sources import ExtraSources
 from .plugin_settings import PluginSettings
@@ -78,7 +79,7 @@ class SettingsDialog(QDialog, FORM_CLASS):
         self.spnConnCount.setValue(PluginSettings.default_tile_layer_conn_count())
         self.spnCacheExp.setValue(QGISSettings.get_default_tile_expiry())
         self.spnNetworkTimeout.setValue(QGISSettings.get_default_network_timeout())
-        if QGis.QGIS_VERSION_INT >= 21808:
+        if Qgis.QGIS_VERSION_INT >= 21808:
             self.chkUseNativeRenderer.setChecked(PluginSettings.use_native_tms())
         else:
             self.chkUseNativeRenderer.setChecked(False)
@@ -95,7 +96,7 @@ class SettingsDialog(QDialog, FORM_CLASS):
         PluginSettings.set_default_tile_layer_conn_count(self.spnConnCount.value())
         QGISSettings.set_default_tile_expiry(self.spnCacheExp.value())
         QGISSettings.set_default_network_timeout(self.spnNetworkTimeout.value())
-        if QGis.QGIS_VERSION_INT >= 21808:
+        if Qgis.QGIS_VERSION_INT >= 21808:
             PluginSettings.set_use_native_tms(self.chkUseNativeRenderer.isChecked())
         # contrib pack
 

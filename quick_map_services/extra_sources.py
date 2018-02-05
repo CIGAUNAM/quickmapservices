@@ -24,12 +24,12 @@ from __future__ import absolute_import
 import json
 import os
 import tempfile
-import urllib2
+import urllib3
 from zipfile import ZipFile
 import shutil
 
-from PyQt4.QtCore import QUrl, QEventLoop, QFile, QIODevice
-from PyQt4.QtNetwork import QNetworkRequest, QNetworkReply
+from PyQt5.QtCore import QUrl, QEventLoop, QFile, QIODevice
+from PyQt5.QtNetwork import QNetworkRequest, QNetworkReply
 from qgis.core import QgsApplication, QgsNetworkAccessManager
 
 from .plugin_settings import PluginSettings
@@ -98,7 +98,7 @@ class ExtraSources(object):
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
     def _get_releases_info(self):
-        response = urllib2.urlopen('%s/%s' % (CONTRIBUTE_REPO_URL, 'releases'))
+        response = urllib3.urlopen('%s/%s' % (CONTRIBUTE_REPO_URL, 'releases'))
         releases_info = json.loads(response.read().decode('utf-8'))
         return releases_info
 

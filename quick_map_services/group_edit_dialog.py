@@ -3,8 +3,9 @@ import codecs
 import os
 import shutil
 
-from PyQt4 import uic
-from PyQt4.QtGui import QDialog, QFileDialog, QMessageBox, QPixmap
+from PyQt5 import uic
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QDialog, QFileDialog, QMessageBox
 from os import path
 
 from . import extra_sources

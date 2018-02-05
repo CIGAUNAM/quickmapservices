@@ -21,8 +21,8 @@
 """
 # Import the PyQt and QGIS libraries
 import math
-from PyQt4.QtCore import QRect, Qt
-from PyQt4.QtGui import QImage, QPainter
+from PyQt5.QtCore import QRect, Qt
+from PyQt5.QtGui import QImage, QPainter
 from qgis.core import QgsRectangle
 
 
@@ -177,7 +177,8 @@ class TileServiceInfo(object):
         # Adapting code Nelson Ugalde Araya nugaldea@gmail.com
         if '{q}' in self.serviceUrl:
             quadkey = ''
-            for i in xrange(zoom):
+            # for i in xrange(zoom):
+            for i in range(zoom):
                 bit = zoom - i
                 digit = ord('0')
                 mask = 1 << (bit - 1)  # if (bit - 1) > 0 else 1 >> (bit - 1)

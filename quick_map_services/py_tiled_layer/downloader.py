@@ -20,8 +20,8 @@
  ***************************************************************************/
 """
 import threading
-from PyQt4.QtCore import QObject, QTimer, QEventLoop, QDateTime, qDebug, SIGNAL, QUrl
-from PyQt4.QtNetwork import QNetworkRequest, QNetworkReply
+from PyQt5.QtCore import QObject, QTimer, QEventLoop, QDateTime, qDebug, pyqtSignal, QUrl
+from PyQt5.QtNetwork import QNetworkRequest, QNetworkReply
 from qgis.core import QgsNetworkAccessManager
 
 
@@ -115,7 +115,7 @@ class Downloader(QObject):
                 else:
                     qDebug("http status code: " + str(httpStatusCode))
 
-                self.emit(SIGNAL('replyFinished(QString, int, int)'), url, reply.error(), isFromCache)
+                self.emit(pyqtSignal('replyFinished(QString, int, int)'), url, reply.error(), isFromCache)
         else:
             if self.sync and httpStatusCode == 404:
                 self.fetchedFiles[url] = self.NOT_FOUND

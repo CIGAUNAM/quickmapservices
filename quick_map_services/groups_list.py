@@ -24,9 +24,10 @@ from __future__ import absolute_import
 import codecs
 import os
 import sys
-from ConfigParser import ConfigParser
-from PyQt4.QtCore import QCoreApplication
-from PyQt4.QtGui import QMenu, QIcon
+from configparser import ConfigParser
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMenu
 from qgis.core import QgsMessageLog
 from .config_reader_helper import ConfigReaderHelper
 from . import extra_sources
@@ -84,7 +85,7 @@ class GroupsList(object):
             #try read translations
             posible_trans = parser.items('ui')
             for key, val in posible_trans:
-                if type(key) is unicode and key == 'alias[%s]' % self.locale:
+                if type(key) is str and key == 'alias[%s]' % self.locale:
                     self.translator.append(group_alias, val)
                     break
             #create menu

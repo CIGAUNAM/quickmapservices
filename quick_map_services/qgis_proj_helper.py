@@ -42,6 +42,7 @@ class ProjectionHelper:
             msg = "Custom crs can't be set for layer {0}!".format(layer.name())
             self.show_bar_message(msg, QgsMessageBar.WARNING, 4)
 
+
     @classmethod
     def show_bar_message(cls, text, level=QgsMessageBar.INFO, duration=0, title=None):
         if PluginSettings.show_messages_in_bar():

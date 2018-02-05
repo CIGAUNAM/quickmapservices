@@ -1,7 +1,8 @@
 import os
 
-from PyQt4 import uic
-from PyQt4.QtGui import QWidget, QIntValidator, QMessageBox, QApplication
+from PyQt5 import uic
+from PyQt5.QtGui import QIntValidator
+from PyQt5.QtWidgets import QWidget, QMessageBox, QApplication
 
 from .line_edit_color_validator import LineEditColorValidator
 

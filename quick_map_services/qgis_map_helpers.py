@@ -1,8 +1,10 @@
 from __future__ import absolute_import
 import ast
-import urlparse
+# import urlparse
+import urllib.parse
 
-from PyQt4.QtCore import QCoreApplication
+
+from PyQt5.QtCore import QCoreApplication
 from qgis.core import QgsRasterLayer, QgsVectorLayer, QgsMessageLog, QgsMapLayerRegistry, QgsProject
 from qgis.gui import QgsMessageBar
 from qgis.utils import iface
@@ -85,8 +87,8 @@ def add_layer_to_map(ds):
         if ds.wfs_params is not None:
             qgis_wfs_uri_base += ds.wfs_params
 
-        o = urlparse.urlparse(qgis_wfs_uri_base)
-        request_attrs = dict(urlparse.parse_qsl(o.query))
+        o = urllib.parse.urlparse(qgis_wfs_uri_base)
+        request_attrs = dict(urllib.parse.parse_qsl(o.query))
         
         new_request_attrs = {}
         for k, v in request_attrs.items():
@@ -110,7 +112,7 @@ def add_layer_to_map(ds):
                 ["%s=%s" % (k, v) for k, v in new_request_attrs.items()]
             )
 
-            qgis_wfs_uri = urlparse.urlunparse(url_parts)
+            qgis_wfs_uri = urllib.parse.urlunparse(url_parts)
             layer = QgsVectorLayer(
                 qgis_wfs_uri,
                 "%s - %s" % (tr(ds.alias), layer_name),
@@ -146,7 +148,7 @@ def add_layer_to_map(ds):
                 position = len(toc_root.children())  # Insert to bottom if wms\tms
             else:
                 position = 0  # insert to top
-            QgsMapLayerRegistry.instance().addMapLayer(layer, False)
+            QgsProject.instance().addMapLayer(layer, False)
             toc_root.insertLayer(position, layer)
 
             # Save link

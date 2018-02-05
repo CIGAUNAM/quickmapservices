@@ -1,8 +1,9 @@
 [general]
 name=QuickMapServices
-qgisMinimumVersion=2.4
+qgisMinimumVersion=3.0
+qgisMaximumVersion=3.98
 description=Collection of easy to add basemaps
-version=0.19.3
+version=0.20
 author=NextGIS
 email=info@nextgis.com
 about=Convenient list of services + search for finding datasets and basemaps. Please contribute new services via http://qms.nextgis.com!

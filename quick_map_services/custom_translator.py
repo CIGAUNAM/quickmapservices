@@ -21,7 +21,7 @@
  ***************************************************************************/
 """
 from __future__ import absolute_import
-from PyQt4.QtCore import QTranslator
+from PyQt5.QtCore import QTranslator
 from .singleton import singleton
 
 
@@ -42,7 +42,7 @@ class CustomTranslator(QTranslator):
 
     def translate(self, context, text, disambiguation):
         try:
-            if (isinstance(text, str) or isinstance(text, unicode)) and text in self.__translates.keys():
+            if (isinstance(text, str) or isinstance(text, str)) and text in self.__translates.keys():
                 return self.__translates[text]
             return ''
         except:

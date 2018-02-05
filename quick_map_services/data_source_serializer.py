@@ -1,9 +1,9 @@
 from __future__ import absolute_import
 import codecs
 import os
-import urlparse
+import urllib.parse
 
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 from .config_reader_helper import ConfigReaderHelper
 from .custom_translator import CustomTranslator
 from .data_source_info import DataSourceInfo
@@ -15,8 +15,8 @@ from .supported_drivers import KNOWN_DRIVERS
 def parse_wms_url_parameter(url, parameters_str, ignore_layers=False):
     wms_url = url.split("?")[0]
     
-    o = urlparse.urlparse(url)
-    parameters = dict(urlparse.parse_qsl(o.query))
+    o = urllib.parse.urlparse(url)
+    parameters = dict(urllib.parse.parse_qsl(o.query))
     
     wms_params = []
     wms_url_params = []
@@ -113,7 +113,7 @@ class DataSourceSerializer(object):
         #try read translations
         posible_trans = parser.items('ui')
         for key, val in posible_trans:
-            if type(key) is unicode and key == 'alias[%s]' % locale:
+            if type(key) is str and key == 'alias[%s]' % locale:
                 translator.append(ds.alias, val)
                 break
 
@@ -199,7 +199,7 @@ class DataSourceSerializer(object):
 
     @classmethod
     def write_to_ini(cls, ds_info, ini_file_path):
-        _to_utf = lambda x: x.encode('utf-8') if isinstance(x, unicode) else x
+        _to_utf = lambda x: x.encode('utf-8') if isinstance(x, str) else x
         config = FixedConfigParser()
 
         config.add_section('general')
