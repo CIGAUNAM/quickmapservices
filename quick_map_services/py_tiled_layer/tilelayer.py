@@ -60,7 +60,7 @@ class LayerDefaultSettings(object):
 
 class TileLayer(QgsPluginLayer, QObject):
 
-
+    signal = pyqtSignal(str, int, int)
 
     CRS_3857 = QgsCoordinateReferenceSystem(3857)
 
@@ -69,6 +69,8 @@ class TileLayer(QgsPluginLayer, QObject):
     CHANGE_SCALE_VALUE = 0.30
 
     def __init__(self, layerDef, creditVisibility=1):
+        #QObject.__init__(self)
+
         QgsPluginLayer.__init__(self, TileLayer.LAYER_TYPE, layerDef.title)
 
         self.iface = iface
@@ -133,10 +135,14 @@ class TileLayer(QgsPluginLayer, QObject):
         self.downloader.default_cache_expiration = QGISSettings.get_default_tile_expiry()
         self.downloader.max_connection = PluginSettings.default_tile_layer_conn_count()  #TODO: Move to INI files
 
-        signal = pyqtSignal("replyFinished(QString, int, int)")
+        #signal = pyqtSignal(str, int, int)
+        self.signal.connect(self.downloader.replyFinished())
+        #signal.connect(self.downloader.replyFinished())
 
 
-        QObject.connect(self.downloader, pyqtSignal("replyFinished(QString, int, int)"), self.networkReplyFinished)
+
+
+        #QObject.connect(self.downloader, pyqtSignal("replyFinished(QString, int, int)"), self.networkReplyFinished)
 
 
 

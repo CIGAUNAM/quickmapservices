@@ -77,7 +77,10 @@ class Downloader(QObject):
 
     def replyFinished(self):
         reply = self.sender()
+        print(reply)
+        print("AQUI")
         url = reply.request().url().toString()
+
         self.log("replyFinished: %s" % url)
         if not url in self.fetchedFiles:
             self.fetchedFiles[url] = None
