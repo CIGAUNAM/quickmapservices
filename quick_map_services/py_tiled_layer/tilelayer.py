@@ -69,7 +69,7 @@ class TileLayer(QgsPluginLayer, QObject):
     CHANGE_SCALE_VALUE = 0.30
 
     def __init__(self, layerDef, creditVisibility=1):
-        #QObject.__init__(self)
+
 
         QgsPluginLayer.__init__(self, TileLayer.LAYER_TYPE, layerDef.title)
 
@@ -135,7 +135,7 @@ class TileLayer(QgsPluginLayer, QObject):
         self.downloader.default_cache_expiration = QGISSettings.get_default_tile_expiry()
         self.downloader.max_connection = PluginSettings.default_tile_layer_conn_count()  #TODO: Move to INI files
 
-        #signal = pyqtSignal(str, int, int)
+        signal = pyqtSignal(str, int, int)
         self.signal.connect(self.downloader.replyFinished())
         #signal.connect(self.downloader.replyFinished())
 
