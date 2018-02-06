@@ -61,7 +61,7 @@ class QuickMapServices(object):
         # Save reference to the QGIS interface
         self.iface = iface
         # initialize plugin directory
-        self.plugin_dir = os.path.dirname(__file__).decode(sys.getfilesystemencoding())
+        self.plugin_dir = os.path.dirname(__file__)  # .decode(sys.getfilesystemencoding())
 
         # initialize locale
         self.translator = QTranslator()
@@ -109,7 +109,8 @@ class QuickMapServices(object):
 
         # Register plugin layer type
         self.tileLayerType = TileLayerType(self)
-        QgsPluginLayerRegistry.instance().addPluginLayerType(self.tileLayerType)
+        # QgsPluginLayerRegistry.addPluginLayerType(self.tileLayerType)
+
 
         # Create menu
         icon_path = self.plugin_dir + '/icons/mActionAddLayer.svg'
@@ -185,7 +186,8 @@ class QuickMapServices(object):
         self.groups_list = None
         self.service_layers = None
         # Unregister plugin layer type
-        QgsPluginLayerRegistry.instance().removePluginLayerType(TileLayer.LAYER_TYPE)
+        # QgsPluginLayerRegistry.removePluginLayerType(TileLayer.LAYER_TYPE)
+        # QgsPluginLayerRegistry.removePluginLayerType(self.tileLayerType)
 
     def build_menu_tree(self):
         # Main Menu
@@ -195,7 +197,10 @@ class QuickMapServices(object):
         self.ds_list = DataSourcesList()
 
         data_sources = self.ds_list.data_sources.values()
-        data_sources.sort(key=lambda x: x.alias or x.id)
+        print(data_sources)
+        print(type(data_sources))
+        # sorted(data_sources)
+        # data_sources.sort(key=lambda x: x.alias or x.id)
 
         ds_hide_list = PluginSettings.get_hide_ds_id_list()
 
@@ -306,6 +311,8 @@ class QuickMapServices(object):
 
     def init_server_panel(self):
         self.server_toolbox = QmsServiceToolbox(self.iface)
+        print(self.server_toolbox)
+        print("aqui")
         self.iface.addDockWidget(PluginSettings.server_dock_area(), self.server_toolbox)
         self.server_toolbox.setWindowIcon(QIcon(self.plugin_dir + '/icons/mActionSearch.svg'))
         self.server_toolbox.setVisible(PluginSettings.server_dock_visibility())

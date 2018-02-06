@@ -34,7 +34,7 @@ from qgis.core import QgsApplication, QgsNetworkAccessManager
 
 from .plugin_settings import PluginSettings
 
-LOCAL_SETTINGS_PATH = os.path.dirname(QgsApplication.qgisUserDbFilePath())
+LOCAL_SETTINGS_PATH = os.path.dirname(QgsApplication.qgisUserDatabaseFilePath())
 PLUGIN_SETTINGS_PATH = os.path.join(LOCAL_SETTINGS_PATH, PluginSettings.product_name())
 
 CONTRIBUTE_DIR_PATH = os.path.join(PLUGIN_SETTINGS_PATH, 'Contribute')

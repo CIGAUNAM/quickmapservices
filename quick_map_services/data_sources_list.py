@@ -21,7 +21,6 @@
  ***************************************************************************/
 """
 from __future__ import absolute_import
-# from configparser import ConfigParser
 import codecs
 import os
 import sys
@@ -37,7 +36,7 @@ from .data_source_serializer import DataSourceSerializer
 from .locale import Locale
 from .supported_drivers import KNOWN_DRIVERS
 
-CURR_PATH = os.path.dirname(__file__).decode(sys.getfilesystemencoding())
+CURR_PATH = os.path.dirname(__file__)  # .decode(sys.getfilesystemencoding())
 
 INTERNAL_DS_PATHS = [os.path.join(CURR_PATH, extra_sources.DATA_SOURCES_DIR_NAME), ]
 CONTRIBUTE_DS_PATHS = [os.path.join(extra_sources.CONTRIBUTE_DIR_PATH, extra_sources.DATA_SOURCES_DIR_NAME), ]

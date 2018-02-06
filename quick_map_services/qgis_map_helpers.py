@@ -5,7 +5,7 @@ import urllib.parse
 
 
 from PyQt5.QtCore import QCoreApplication
-from qgis.core import QgsRasterLayer, QgsVectorLayer, QgsMessageLog, QgsMapLayerRegistry, QgsProject
+from qgis.core import QgsRasterLayer, QgsVectorLayer, QgsMessageLog, QgsProject
 from qgis.gui import QgsMessageBar
 from qgis.utils import iface
 

@@ -21,7 +21,7 @@
 
 from PyQt5.QtGui import QColor
 from qgis.gui import QgsRubberBand
-from qgis.core import Qgis, QgsRectangle, QgsCoordinateReferenceSystem, QgsCoordinateTransform
+from qgis.core import Qgis, QgsRectangle, QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsPoint, QgsProject, QgsWkbTypes
 from qgis.utils import iface
 
 class RubberBandResultRenderer():
@@ -30,13 +30,15 @@ class RubberBandResultRenderer():
         self.iface = iface
 
         self.srs_wgs84 = QgsCoordinateReferenceSystem(4326)
-        self.transformation = QgsCoordinateTransform(self.srs_wgs84, self.srs_wgs84)
+        # self.transformation = QgsCoordinateTransform(self.srs_wgs84, self.srs_wgs84)
+        self.transformation = QgsCoordinateTransform(QgsCoordinateReferenceSystem("EPSG:4326"), QgsCoordinateReferenceSystem("EPSG:4326"), QgsProject.instance())
 
-        self.rb = QgsRubberBand(self.iface.mapCanvas(), Qgis.Point)
+
+        self.rb = QgsRubberBand(self.iface.mapCanvas(), QgsWkbTypes.PointGeometry)
         self.rb.setColor(QColor('magenta'))
         self.rb.setIconSize(12)
 
-        self.features_rb = QgsRubberBand(self.iface.mapCanvas(), Qgis.Point)
+        self.features_rb = QgsRubberBand(self.iface.mapCanvas(), QgsWkbTypes.PointGeometry)
         magenta_transp = QColor('#3388ff')
         magenta_transp.setAlpha(120)
         self.features_rb.setColor(magenta_transp)
@@ -53,7 +55,7 @@ class RubberBandResultRenderer():
             self.center_to_point(point)
 
     def clear(self):
-        self.rb.reset(Qgis.Point)
+        self.rb.reset(QgsWkbTypes.PointGeometry)
 
     def need_transform(self):
         return self.iface.mapCanvas().mapRenderer().destinationCrs().postgisSrid() != 4326
@@ -106,4 +108,4 @@ class RubberBandResultRenderer():
         self.features_rb.setToGeometry(geom, None)
 
     def clear_feature(self):
-        self.features_rb.reset(Qgis.Point)
+        self.features_rb.reset(QgsWkbTypes.PointGeometry)

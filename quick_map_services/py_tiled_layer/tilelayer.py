@@ -23,9 +23,11 @@ from __future__ import absolute_import
 # Import the PyQt and QGIS libraries
 import os
 import threading
-from PyQt5.QtCore import QObject, qDebug, QRectF, QPointF, QPoint, QTimer, QEventLoop
-from PyQt5.QtCore import pyqtSignal
+
+from PyQt5.QtCore import QObject, qDebug, QRectF, QPointF, QPoint, QTimer, QEventLoop, pyqtSignal
 from PyQt5.QtGui import QFont, QColor, QBrush
+
+
 from qgis.core import QgsPluginLayer, QgsCoordinateReferenceSystem, QgsPluginLayerType, QgsImageOperation
 from qgis.gui import QgsMessageBar
 from qgis.utils import iface
@@ -44,7 +46,7 @@ try:
 except:
     hasGdal = False
 
-debug_mode = 0
+debug_mode = 1
 
 
 class LayerDefaultSettings(object):
@@ -56,7 +58,9 @@ class LayerDefaultSettings(object):
     CONTRAST = 1.0
 
 
-class TileLayer(QgsPluginLayer):
+class TileLayer(QgsPluginLayer, QObject):
+
+
 
     CRS_3857 = QgsCoordinateReferenceSystem(3857)
 
@@ -128,7 +132,14 @@ class TileLayer(QgsPluginLayer):
         self.downloader.userAgent = QGISSettings.get_default_user_agent()
         self.downloader.default_cache_expiration = QGISSettings.get_default_tile_expiry()
         self.downloader.max_connection = PluginSettings.default_tile_layer_conn_count()  #TODO: Move to INI files
+
+        signal = pyqtSignal("replyFinished(QString, int, int)")
+
+
         QObject.connect(self.downloader, pyqtSignal("replyFinished(QString, int, int)"), self.networkReplyFinished)
+
+
+
 
         #network
         self.downloadTimeout = QGISSettings.get_default_network_timeout()

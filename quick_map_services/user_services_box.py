@@ -12,7 +12,7 @@ from .data_sources_list import DataSourcesList, USER_DS_PATHS
 from .ds_edit_dialog import DsEditDialog
 from .data_sources_model import DSManagerModel
 
-plugin_dir = os.path.dirname(__file__).decode(sys.getfilesystemencoding())
+plugin_dir = os.path.dirname(__file__)  # .decode(sys.getfilesystemencoding())
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'user_services_box.ui'))

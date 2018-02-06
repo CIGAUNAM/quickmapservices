@@ -23,7 +23,7 @@
 # from PyQt5.QtCore import QSettings
 from PyQt5 import QtCore 
 from qgis.core import QgsNetworkAccessManager
-
+from PyQt5.QtCore import QSettings
 
 
 
